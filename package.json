@@ -1,0 +1,12 @@
+{
+  "name": "next-video-site",
+  "version": "1.0.0",
+  "description": "Utilities for CloudFront signed URLs",
+  "type": "module",
+  "scripts": {
+    "test": "node -e \"console.log('No tests specified')\""
+  },
+  "dependencies": {
+    "@aws-sdk/cloudfront-signer": "^3.481.0"
+  }
+}

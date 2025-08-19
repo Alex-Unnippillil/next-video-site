@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFront distribution with OAC for VOD assets
+
+Parameters:
+  VODBucketName:
+    Type: String
+    Description: Name of the S3 bucket containing VOD assets
+  KeyGroupId:
+    Type: String
+    Description: ID of an existing CloudFront key group for signed URLs
+
+Resources:
+  VODBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref VODBucketName
+
+  VODOAC:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub "${VODBucketName}-oac"
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Origins:
+          - Id: VODOrigin
+            DomainName: !GetAtt VODBucket.RegionalDomainName
+            S3OriginConfig: {}
+            OriginAccessControlId: !Ref VODOAC
+        DefaultCacheBehavior:
+          TargetOriginId: VODOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          AllowedMethods: [GET, HEAD]
+          CachedMethods: [GET, HEAD]
+          ForwardedValues:
+            QueryString: false
+          MinTTL: 86400
+          DefaultTTL: 86400
+          MaxTTL: 31536000
+          TrustedKeyGroups:
+            - !Ref KeyGroupId
+          Compress: true
+        CacheBehaviors:
+          - PathPattern: '*.m3u8'
+            TargetOriginId: VODOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            ForwardedValues:
+              QueryString: true
+            MinTTL: 0
+            DefaultTTL: 5
+            MaxTTL: 60
+            TrustedKeyGroups:
+              - !Ref KeyGroupId
+            Compress: true
+          - PathPattern: '*.mpd'
+            TargetOriginId: VODOrigin
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD]
+            CachedMethods: [GET, HEAD]
+            ForwardedValues:
+              QueryString: true
+            MinTTL: 0
+            DefaultTTL: 5
+            MaxTTL: 60
+            TrustedKeyGroups:
+              - !Ref KeyGroupId
+            Compress: true
+        PriceClass: PriceClass_100
+
+Outputs:
+  DistributionDomainName:
+    Description: Domain name of the CloudFront distribution
+    Value: !GetAtt Distribution.DomainName

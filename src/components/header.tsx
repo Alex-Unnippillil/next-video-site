@@ -55,6 +55,12 @@ export function Header() {
               Series
             </Link>
             <Link
+              href='/design'
+              className='text-foreground hover:text-primary-600 transition-colors'
+            >
+              Design
+            </Link>
+            <Link
               href='/about'
               className='text-foreground hover:text-primary-600 transition-colors'
             >
@@ -139,6 +145,12 @@ export function Header() {
               className='block px-3 py-2 text-foreground hover:text-primary-600 transition-colors'
             >
               Series
+            </Link>
+            <Link
+              href='/design'
+              className='block px-3 py-2 text-foreground hover:text-primary-600 transition-colors'
+            >
+              Design
             </Link>
             <Link
               href='/about'

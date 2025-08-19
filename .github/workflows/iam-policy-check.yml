@@ -1,0 +1,24 @@
+name: IAM Policy Check
+
+on:
+  pull_request:
+    paths:
+      - 'policies/**'
+      - 'scripts/validate_iam_policies.sh'
+  push:
+    branches: [ main ]
+    paths:
+      - 'policies/**'
+      - 'scripts/validate_iam_policies.sh'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install AWS CLI
+        run: sudo apt-get update && sudo apt-get install -y awscli jq
+      - name: Validate policies
+        run: ./scripts/validate_iam_policies.sh origin/main HEAD

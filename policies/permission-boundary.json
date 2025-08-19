@@ -1,0 +1,42 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowS3BucketObjects",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::example-bucket/*"
+    },
+    {
+      "Sid": "AllowS3List",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::example-bucket"
+    },
+    {
+      "Sid": "AllowLogWrite",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:123456789012:log-group:example:*"
+    },
+    {
+      "Sid": "DenyIAM",
+      "Effect": "Deny",
+      "Action": "iam:*",
+      "Resource": "arn:aws:iam::*"
+    },
+    {
+      "Sid": "DenyEC2",
+      "Effect": "Deny",
+      "Action": "ec2:*",
+      "Resource": "arn:aws:ec2:*:*:*"
+    }
+  ]
+}

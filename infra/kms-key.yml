@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: KMS key for next-video-site with restrictive policy and annual rotation
+
+Parameters:
+  AppRoleArn:
+    Type: String
+    Description: ARN of IAM role allowed to use the key
+
+Resources:
+  AppKmsKey:
+    Type: AWS::KMS::Key
+    Properties:
+      Description: CMK for application data encryption
+      EnableKeyRotation: true
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: Allow account root full access
+            Effect: Allow
+            Principal:
+              AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
+            Action: 'kms:*'
+            Resource: '*'
+          - Sid: Allow app role use of the key
+            Effect: Allow
+            Principal:
+              AWS: !Ref AppRoleArn
+            Action:
+              - kms:Encrypt
+              - kms:Decrypt
+              - kms:GenerateDataKey
+              - kms:DescribeKey
+            Resource: '*'
+  AppKmsAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/next-video-site
+      TargetKeyId: !Ref AppKmsKey
+
+Outputs:
+  KeyArn:
+    Description: ARN of the KMS key
+    Value: !GetAtt AppKmsKey.Arn

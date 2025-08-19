@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IVS Broadcast Demo</title>
+</head>
+<body>
+  <h1>IVS Broadcast Demo</h1>
+  <div id="auth">
+    <label for="role">Role:</label>
+    <select id="role">
+      <option value="Creator">Creator</option>
+      <option value="Viewer">Viewer</option>
+    </select>
+    <button id="enter">Enter</button>
+  </div>
+
+  <div id="broadcast" style="display:none">
+    <div id="config">
+      <label>Camera: <select id="videoDevices"></select></label>
+      <label>Microphone: <select id="audioDevices"></select></label>
+      <label>Ingest Endpoint: <input id="ingest" placeholder="a1b2c3d4e5f6.global-contribute.live-video.net" size="50" /></label>
+      <label>Stream Key: <input id="streamKey" size="50" /></label>
+    </div>
+
+    <div>
+      <video id="preview" width="640" height="360" autoplay muted playsinline></video>
+    </div>
+
+    <div>
+      <button id="start">Start Stream</button>
+      <button id="stop" disabled>Stop Stream</button>
+    </div>
+
+    <pre id="stats"></pre>
+  </div>
+
+  <script src="https://unpkg.com/amazon-ivs-web-broadcast@1.27.0/dist/amazon-ivs-web-broadcast.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

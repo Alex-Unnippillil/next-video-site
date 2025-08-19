@@ -1,0 +1,6 @@
+{
+  "TemplateName": "WelcomeTemplate",
+  "SubjectPart": "Welcome to Next Video Site",
+  "TextPart": "Hi {{name}}, welcome to Next Video Site!",
+  "HtmlPart": "<h1>Welcome {{name}}</h1><p>Thanks for joining Next Video Site.</p>"
+}

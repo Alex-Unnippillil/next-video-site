@@ -1,0 +1,18 @@
+{
+  "name": "next-video-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -e \"console.log('No tests')\"",
+    "register-templates": "node scripts/registerTemplates.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@aws-sdk/client-ses": "^3.864.0",
+    "@aws-sdk/client-sns": "^3.864.0"
+  }
+}

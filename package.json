@@ -1,0 +1,17 @@
+{
+  "name": "next-video-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node scripts/uploadCaption.js public/captions/sample.vtt --dry-run",
+    "upload:caption": "node scripts/uploadCaption.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "node-webvtt": "^1.9.4"
+  }
+}

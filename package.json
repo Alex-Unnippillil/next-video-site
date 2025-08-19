@@ -1,5 +1,12 @@
 {
   "name": "next-video-site",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "echo 'No tests to run'"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.437.0"
+=======
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

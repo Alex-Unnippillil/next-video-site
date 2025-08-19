@@ -1,5 +1,7 @@
 {
   "name": "next-video-site",
+  "version": "1.0.0",
+=======
   "version": "0.1.0",
   "scripts": {
     "test": "echo 'No tests to run'"
@@ -38,6 +40,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "echo 'No tests'"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "pg": "8.11.3"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5"
+=======
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prettier": "prettier --check .",

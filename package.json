@@ -1,0 +1,14 @@
+{
+  "name": "next-video-site",
+  "version": "1.0.0",
+  "description": "Utilities for DynamoDB tables used in next-video-site",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo 'No tests specified'"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.426.0",
+    "@aws-sdk/lib-dynamodb": "^3.426.0"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "widgets": [
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [["NextVideoSite", "StartupTime", { "stat": "p95" }]],
+        "period": 60,
+        "title": "Startup Time p95",
+        "region": "us-east-1",
+        "yAxis": { "left": { "label": "ms" } }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 0,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [["NextVideoSite", "ApiLatency", { "stat": "p95" }]],
+        "period": 60,
+        "title": "API Latency p95",
+        "region": "us-east-1",
+        "yAxis": { "left": { "label": "ms" } }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 6,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [["NextVideoSite", "PlayerErrors", { "stat": "sum" }]],
+        "period": 60,
+        "title": "Player Errors",
+        "region": "us-east-1"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 6,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [["NextVideoSite", "RebufferDuration", { "stat": "avg" }]],
+        "period": 60,
+        "title": "Rebuffer Duration avg",
+        "region": "us-east-1",
+        "yAxis": { "left": { "label": "ms" } }
+      }
+    }
+  ]
+}

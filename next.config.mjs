@@ -1,3 +1,12 @@
+
+import withNextIntl from 'next-intl/plugin';
+
+const withIntl = withNextIntl('./i18n.ts');
+
+export default withIntl({
+  reactStrictMode: true
+});
+=======
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -16,3 +25,4 @@ const nextConfig = {
 };
 
 export default nextConfig;
+

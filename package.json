@@ -1,0 +1,23 @@
+{
+  "name": "next-video-site",
+  "version": "1.0.0",
+  "bin": {
+    "next-video-site": "bin/next-video-site.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "cdk": "cdk",
+    "test": "npm run build && npx cdk synth"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.211.0",
+    "constructs": "^10.4.2",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "aws-cdk": "^2.1025.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}

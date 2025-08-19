@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toast';
+import { defaultMetadata } from '@/lib/metadata';
 import './globals.css';
 
 const inter = Inter({
@@ -17,54 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Starlight Stream',
-    template: '%s | Starlight Stream',
-  },
-  description:
-    'A modern video streaming platform built with Next.js 14, featuring a comprehensive design system and beautiful UI components.',
-  keywords: [
-    'video',
-    'streaming',
-    'entertainment',
-    'movies',
-    'tv shows',
-    'next.js',
-    'react',
-    'tailwind',
-  ],
-  authors: [{ name: 'Starlight Stream Team' }],
-  creator: 'Starlight Stream Team',
-  openGraph: {
-    title: 'Starlight Stream',
-    description: 'A modern video streaming platform built with Next.js 14',
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://starlight-stream.vercel.app',
-    siteName: 'Starlight Stream',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Starlight Stream',
-    description: 'A modern video streaming platform built with Next.js 14',
-    creator: '@starlightstream',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: 'your-google-verification-code',
-  },
-};
+export const metadata: Metadata = defaultMetadata;
 
 export const viewport: Viewport = {
   width: 'device-width',

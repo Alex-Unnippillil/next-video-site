@@ -1,0 +1,19 @@
+{
+  "Role": "arn:aws:iam::ACCOUNT:role/MediaConvert_Default_Role",
+  "JobTemplate": "HlsDashAacCmaf",
+  "Settings": {
+    "Inputs": [
+      {
+        "FileInput": "s3://STLS-vod-assets/input/example.mp4",
+        "AudioSelectors": {
+          "Audio Selector 1": {
+            "DefaultSelection": "DEFAULT"
+          }
+        }
+      }
+    ]
+  },
+  "UserMetadata": {
+    "project": "stls-vod"
+  }
+}

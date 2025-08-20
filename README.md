@@ -1,4 +1,3 @@
-# Starlight Stream
 
 A modern video streaming platform built with Next.js 14, featuring AWS Cognito authentication, internationalization, and comprehensive development toolchain.
 
@@ -207,3 +206,4 @@ Ensure AWS credentials with permission to read the parameters are available in p
 - `scripts/create-cognito-groups.js` - Creates required Cognito user groups
 - `scripts/accept-pr.sh` / `scripts/accept-pr.ps1` - Automated PR acceptance
 - `scripts/process-all-prs.ps1` - Bulk PR processing
+

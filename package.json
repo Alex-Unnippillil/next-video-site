@@ -1,22 +1,3 @@
-{
-  "name": "next-video-site",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "test": "echo \"No tests\""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "next": "^15.4.7",
-    "raw-body": "^3.0.0",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "stripe": "^18.4.0"
-  }
+﻿{
+}
 }

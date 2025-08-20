@@ -1,1 +1,7 @@
-﻿{}
+{
+  "name": "next-video-site",
+  "version": "1.0.0",
+  "dependencies": {
+    "@aws-sdk/client-personalize-events": "^3.864.0"
+  }
+}

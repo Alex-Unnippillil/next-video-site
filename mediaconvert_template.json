@@ -1,0 +1,92 @@
+{
+  "Name": "HlsDashAacCmaf",
+  "Description": "HLS and DASH outputs using CMAF segments, AAC audio, and KMS encryption",
+  "Settings": {
+    "TimecodeConfig": {"Source": "ZEROBASED"},
+    "OutputGroups": [
+      {
+        "Name": "Apple HLS",
+        "Outputs": [
+          {
+            "VideoDescriptionName": "video_main",
+            "AudioDescriptionNames": ["audio_main"],
+            "ContainerSettings": {"Container": "M3U8"},
+            "NameModifier": "_hls"
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "HLS_GROUP_SETTINGS",
+          "HlsGroupSettings": {
+            "SegmentLength": 6,
+            "SegmentControl": "SEGMENTED_FILES",
+            "SegmentType": "CMAF",
+            "Destination": "s3://STLS-vod-assets/hls/",
+            "DestinationSettings": {
+              "S3Settings": {
+                "Encryption": {
+                  "Mode": "SSEKMS",
+                  "KmsKeyArn": "arn:aws:kms:REGION:ACCOUNT:key/CMK-ID"
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "Name": "MPEG-DASH",
+        "Outputs": [
+          {
+            "VideoDescriptionName": "video_main",
+            "AudioDescriptionNames": ["audio_main"],
+            "ContainerSettings": {"Container": "MP4"},
+            "NameModifier": "_dash"
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "DASH_ISO_GROUP_SETTINGS",
+          "DashIsoGroupSettings": {
+            "SegmentLength": 6,
+            "FragmentLength": 2,
+            "Destination": "s3://STLS-vod-assets/dash/",
+            "DestinationSettings": {
+              "S3Settings": {
+                "Encryption": {
+                  "Mode": "SSEKMS",
+                  "KmsKeyArn": "arn:aws:kms:REGION:ACCOUNT:key/CMK-ID"
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "VideoDescriptions": [
+      {
+        "Name": "video_main",
+        "CodecSettings": {
+          "Codec": "H_264",
+          "H264Settings": {
+            "RateControlMode": "CBR",
+            "Bitrate": 5000000,
+            "GopSize": 2,
+            "GopSizeUnits": "SECONDS"
+          }
+        }
+      }
+    ],
+    "AudioDescriptions": [
+      {
+        "Name": "audio_main",
+        "AudioSourceName": "Audio Selector 1",
+        "CodecSettings": {
+          "Codec": "AAC",
+          "AacSettings": {
+            "Bitrate": 96000,
+            "CodingMode": "CODING_MODE_2_0",
+            "SampleRate": 48000
+          }
+        }
+      }
+    ]
+  }
+}

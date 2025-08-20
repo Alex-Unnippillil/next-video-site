@@ -1,4 +1,4 @@
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 import PlayerControls from '../../components/PlayerControls';
 
 export default function HomePage() {

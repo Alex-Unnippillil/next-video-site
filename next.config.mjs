@@ -1,16 +1,12 @@
-
 import withNextIntl from 'next-intl/plugin';
 
 const withIntl = withNextIntl('./i18n.ts');
 
-export default withIntl({
-  reactStrictMode: true
-});
-=======
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   experimental: {
-    typedRoutes: true,
+    typedRoutes: false,
   },
   typescript: {
     // Dangerously allow production builds to successfully complete even if
@@ -24,5 +20,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
-
+export default withIntl(nextConfig);

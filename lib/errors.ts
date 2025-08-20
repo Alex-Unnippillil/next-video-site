@@ -15,5 +15,7 @@ export function isAppError(error: unknown): error is AppError {
 }
 
 export function getUserMessage(error: unknown): string {
-  return isAppError(error) ? error.userMessage : 'An unexpected error occurred.';
+  return isAppError(error)
+    ? error.userMessage
+    : 'An unexpected error occurred.';
 }

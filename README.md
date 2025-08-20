@@ -1,88 +1,13 @@
-# Next Video Site
-
-This project demonstrates a simple Next.js application configured to use AWS Cognito
-with Google and Apple identity providers. It stores user consent timestamps in
-PostgreSQL.
-
-## Development
-
-```
-npm install
-npm run dev
-```
-
-Environment variables:
-
-- `NEXT_PUBLIC_COGNITO_DOMAIN` – Cognito domain
-- `NEXT_PUBLIC_COGNITO_CLIENT_ID` – Cognito client ID
-- `NEXT_PUBLIC_COGNITO_REDIRECT_URI` – Redirect URI for callbacks
-- `DATABASE_URL` – PostgreSQL connection string
-
-Run the SQL migration in `db/migrations/001_create_user_consent.sql` to create
-the table for consent timestamps.
-=======
-# next-video-site
-
-Utility scripts and server utilities for the video site.
-
-## Cognito
-
-Run the script below to ensure required groups exist in the user pool:
-
-```bash
-COGNITO_USER_POOL_ID=your_pool AWS_REGION=us-east-1 node scripts/create-cognito-groups.js
-```
-
-## Auth Helpers
-
-`lib/auth/roles.ts` exposes helpers for decoding Cognito groups and asserting roles in API routes.
-
-`middleware.ts` protects `/admin` and `/creator` routes based on the authenticated user's groups.
-=======
-Example Next.js app with internationalization using `next-intl` for English and French locales.
-=======
-
-# next-video-site
-
-## Configuration
-
-### Public runtime config
-
-The app reads public configuration values from `next.config.js`. These values are
-exposed to the browser and should only contain non‑sensitive information.
-
-Required variables:
-
-- `NEXT_PUBLIC_API_BASE_URL` – Base URL for public API requests.
-
-### Secure parameters
-
-Sensitive values are loaded from AWS Systems Manager Parameter Store at runtime
-using a small helper with in-memory caching. During development the helper falls
-back to values defined in a local `.env.local` file.
-
-Required secure parameters:
-
-- `VIDEO_API_KEY` – API key for the video service.
-
-For local development create an `.env.local` file:
-
-```
-NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api
-VIDEO_API_KEY=dev-api-key
-```
-
-Ensure AWS credentials with permission to read the parameters are available in
-production environments.
-=======
 # Starlight Stream
 
-A modern video streaming platform built with Next.js 14, featuring a comprehensive development toolchain and beautiful UI.
+A modern video streaming platform built with Next.js 14, featuring AWS Cognito authentication, internationalization, and comprehensive development toolchain.
 
 ## Features
 
 - 🎬 **Modern Streaming Platform** - Built with Next.js 14 and React 18
-- 🎨 **Beautiful UI** - Tailwind CSS with custom design system
+- 🔐 **AWS Cognito Authentication** - Social logins and role-based access control
+- 🌍 **Internationalization** - Support for English and French with next-intl
+- 🎨 **Beautiful UI** - Tailwind CSS with custom design system and shadcn/ui components
 - 🔧 **Development Tools** - ESLint, Prettier, TypeScript with strict configuration
 - 🧪 **Testing Suite** - Jest for unit tests, Playwright for E2E testing
 - 📱 **Responsive Design** - Mobile-first approach with modern animations
@@ -96,6 +21,8 @@ A modern video streaming platform built with Next.js 14, featuring a comprehensi
 
 - Node.js 18+
 - npm, yarn, or pnpm
+- PostgreSQL database (for user consent tracking)
+- AWS Cognito User Pool configured
 
 ### Installation
 
@@ -112,13 +39,29 @@ cd starlight-stream
 npm install
 ```
 
-3. Set up git hooks
+3. Set up environment variables
+
+For local development create an `.env.local` file:
+
+```
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api
+VIDEO_API_KEY=dev-api-key
+DATABASE_URL=postgresql://username:password@localhost:5432/starlight_stream
+COGNITO_USER_POOL_ID=your-cognito-user-pool-id
+COGNITO_CLIENT_ID=your-cognito-client-id
+```
+
+4. Set up the database
+
+Run the SQL migration in `db/migrations/001_create_user_consent.sql` to create the table for consent timestamps.
+
+5. Set up git hooks
 
 ```bash
 npm run prepare
 ```
 
-4. Start the development server
+6. Start the development server
 
 ```bash
 npm run dev
@@ -173,20 +116,52 @@ src/
 │   └── hero.tsx
 ├── hooks/             # Custom React hooks
 ├── lib/               # Utility libraries
+│   └── auth/          # Authentication utilities
 ├── styles/            # Additional styles
 ├── types/             # TypeScript type definitions
 └── utils/             # Utility functions
+
+app/[locale]/          # Internationalized pages
+components/            # Shared components
+db/migrations/         # Database migrations
+lib/auth/             # Authentication logic
+messages/             # Translation files
+scripts/              # Utility scripts
+terraform/            # Infrastructure as Code
 ```
 
 ## Technology Stack
 
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
+- **Authentication**: AWS Cognito
+- **Database**: PostgreSQL
+- **Internationalization**: next-intl
+- **Styling**: Tailwind CSS + shadcn/ui
 - **Testing**: Jest + React Testing Library + Playwright
 - **Linting**: ESLint + Prettier
 - **Git Hooks**: Husky + lint-staged
 - **Commit Convention**: Conventional Commits with commitlint
+
+## Authentication & Authorization
+
+The application uses AWS Cognito for authentication with role-based access control:
+
+- **Admin Role**: Full access to admin routes (`/admin/*`)
+- **Creator Role**: Access to creator tools (`/creator/*`)
+- **Regular Users**: Access to public content
+
+`lib/auth/roles.ts` exposes helpers for decoding Cognito groups and asserting roles in API routes.
+`middleware.ts` protects routes based on the authenticated user's groups.
+
+## Internationalization
+
+The application supports multiple languages using next-intl:
+
+- English (default)
+- French
+
+Translation files are located in the `messages/` directory. The middleware handles locale detection and routing.
 
 ## Development Guidelines
 
@@ -217,23 +192,18 @@ The project uses TypeScript path aliases for cleaner imports:
 - `@/components/*` - components directory
 - `@/lib/*` - lib directory
 - `@/styles/*` - styles directory
-- `@/types/*` - types directory
-- `@/utils/*` - utils directory
-- `@/hooks/*` - hooks directory
-- `@/app/*` - app directory
 
-## API Routes
+## Infrastructure
 
-- `GET /api/health` - Health check endpoint
+The project includes Terraform configurations for AWS resources:
 
-## Contributing
+- Cognito User Pool and Identity Provider setup
+- Automated scripts for Cognito group management
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes and commit: `git commit -m 'feat: add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+Ensure AWS credentials with permission to read the parameters are available in production environments.
 
-## License
+## Scripts
 
-This project is licensed under the MIT License.
+- `scripts/create-cognito-groups.js` - Creates required Cognito user groups
+- `scripts/accept-pr.sh` / `scripts/accept-pr.ps1` - Automated PR acceptance
+- `scripts/process-all-prs.ps1` - Bulk PR processing

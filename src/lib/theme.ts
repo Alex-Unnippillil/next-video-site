@@ -222,7 +222,9 @@ export const theme = {
 
 // Helper functions for theme token access
 export const getThemeToken = (path: string) => {
-  return path.split('.').reduce((obj, key) => obj?.[key], theme);
+  return path
+    .split('.')
+    .reduce((obj: Record<string, any>, key: string) => obj?.[key], theme);
 };
 
 // CSS custom properties generator

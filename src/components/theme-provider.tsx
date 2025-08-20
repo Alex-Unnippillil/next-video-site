@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { type ThemeProviderProps } from 'next-themes/dist/types';
+import { ThemeProviderProps } from 'next-themes';
 
 // Theme configuration
 export interface ThemeConfig {
@@ -136,7 +136,8 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
 }
 
 // Re-export useTheme for convenience
-export { useTheme } from 'next-themes';
+import { useTheme } from 'next-themes';
+export { useTheme };
 
 // Simple icons (can be replaced with lucide-react or other icon library)
 function SunIcon({ className }: { className?: string }) {

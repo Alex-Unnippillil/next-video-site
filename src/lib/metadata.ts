@@ -146,23 +146,22 @@ export function generateWatchMetadata(
           alt: title,
         },
       ],
-      video: {
-        url: `${baseUrl}/api/video/${videoId}`,
-        secureUrl: `${baseUrl}/api/video/${videoId}`,
-        type: 'video/mp4',
-        width: 1920,
-        height: 1080,
-      },
+      videos: [
+        {
+          url: `${baseUrl}/api/video/${videoId}`,
+          secureUrl: `${baseUrl}/api/video/${videoId}`,
+          type: 'video/mp4',
+          width: 1920,
+          height: 1080,
+        },
+      ],
     },
     twitter: {
       title: `${title} - Starlight Stream`,
       description,
       images: [ogImage],
-      player: {
-        url: `${baseUrl}/embed/${videoId}`,
-        width: 1920,
-        height: 1080,
-      },
+      site: '@StarlightStream',
+      creator: '@StarlightStream',
     },
     other: {
       'video:duration': videoData?.duration || '120',

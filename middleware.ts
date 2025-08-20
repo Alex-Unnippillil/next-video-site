@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 import { Role, userHasRole, parseRolesFromToken } from './lib/auth/roles';
 
 function getToken(req: NextRequest): string {
@@ -9,10 +10,17 @@ function getToken(req: NextRequest): string {
   return parts.length > 1 ? parts[1] : '';
 }
 
+// Create the internationalization middleware
+const intlMiddleware = createMiddleware({
+  locales: ['en', 'fr'],
+  defaultLocale: 'en',
+});
+
 export function middleware(req: NextRequest) {
   const token = getToken(req);
   const path = req.nextUrl.pathname;
 
+  // Handle authentication for protected routes
   if (path.startsWith('/admin')) {
     if (!userHasRole(token, Role.Admin)) {
       return NextResponse.redirect(new URL('/api/unauthorized', req.url));
@@ -26,19 +34,14 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // Apply internationalization middleware for other routes
+  if (path.match(/^\/(en|fr)/)) {
+    return intlMiddleware(req);
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/creator/:path*']
-=======
-import createMiddleware from 'next-intl/middleware';
-
-export default createMiddleware({
-  locales: ['en', 'fr'],
-  defaultLocale: 'en'
-});
-
-export const config = {
-  matcher: ['/', '/(en|fr)/:path*']
+  matcher: ['/', '/(en|fr)/:path*', '/admin/:path*', '/creator/:path*'],
 };

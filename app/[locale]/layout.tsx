@@ -1,11 +1,17 @@
-import {NextIntlClientProvider} from 'next-intl';
-import {notFound} from 'next/navigation';
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
 import Navigation from '../../components/Navigation';
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 
-export const generateStaticParams = () => [{locale: 'en'}, {locale: 'fr'}];
+export const generateStaticParams = () => [{ locale: 'en' }, { locale: 'fr' }];
 
-export default async function LocaleLayout({children, params: {locale}}: {children: ReactNode; params: {locale: string}}) {
+export default async function LocaleLayout({
+  children,
+  params: { locale },
+}: {
+  children: ReactNode;
+  params: { locale: string };
+}) {
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;

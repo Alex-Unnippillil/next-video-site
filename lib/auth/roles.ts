@@ -3,13 +3,15 @@ import type { NextApiRequest } from 'next';
 export enum Role {
   Admin = 'Admin',
   Creator = 'Creator',
-  Viewer = 'Viewer'
+  Viewer = 'Viewer',
 }
 
 export function parseRolesFromToken(token: string): string[] {
   if (!token) return [];
   try {
-    const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    const payload = JSON.parse(
+      Buffer.from(token.split('.')[1], 'base64').toString()
+    );
     return payload['cognito:groups'] || [];
   } catch {
     return [];

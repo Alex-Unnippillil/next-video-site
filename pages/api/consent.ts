@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Client } from 'pg';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'POST') {
     res.status(405).end();
     return;
@@ -18,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await client.query(
     `INSERT INTO user_consent (user_id, consented_at) VALUES ($1, now())
      ON CONFLICT (user_id) DO UPDATE SET consented_at = excluded.consented_at`,
-    [userId],
+    [userId]
   );
   await client.end();
 

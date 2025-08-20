@@ -1,17 +1,1 @@
-{
-  "version": 2,
-  "rules": [
-    {
-      "description": "Sample 10% of requests to API routes",
-      "service_name": "*",
-      "http_method": "*",
-      "url_path": "/api*",
-      "fixed_target": 1,
-      "rate": 0.1
-    }
-  ],
-  "default": {
-    "fixed_target": 1,
-    "rate": 0.05
-  }
-}
+﻿

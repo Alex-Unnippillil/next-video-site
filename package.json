@@ -1,12 +1,1 @@
-{
-  "name": "next-video-site",
-  "version": "1.0.0",
-  "description": "Next video site utilities",
-  "main": "lib/envelope.js",
-  "scripts": {
-    "test": "node -e \"console.log('No tests yet')\""
-  },
-  "dependencies": {
-    "@aws-sdk/client-kms": "^3.563.0"
-  }
-}
+﻿

@@ -1,6 +1,1 @@
-{
-  "TemplateName": "TranscodingCompleteTemplate",
-  "SubjectPart": "Your video is ready",
-  "TextPart": "Hi {{name}}, your video {{videoTitle}} has finished transcoding.",
-  "HtmlPart": "<p>Hi {{name}},</p><p>Your video <strong>{{videoTitle}}</strong> has finished transcoding.</p>"
-}
+﻿

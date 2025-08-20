@@ -1,17 +1,1 @@
-{
-  "name": "next-video-site",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "build": "tsc",
-    "test": "echo \"No tests configured\""
-  },
-  "dependencies": {
-    "aws-cdk-lib": "^2.110.0",
-    "constructs": "^10.0.0",
-    "source-map-support": "^0.5.21"
-  },
-  "devDependencies": {
-    "typescript": "^5.2.2"
-  }
-}
+﻿

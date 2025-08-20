@@ -1,0 +1,18 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "about": "About"
+  },
+  "Auth": {
+    "login": "Log in",
+    "logout": "Log out"
+  },
+  "Player": {
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "Language": {
+    "switchToEnglish": "English",
+    "switchToFrench": "Français"
+  }
+}

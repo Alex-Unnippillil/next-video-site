@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-personalize": "^3.556.0"
+    "@aws-sdk/client-personalize": "^3.556.0",
+    "hls.js": "^1.6.11"
   }
 }

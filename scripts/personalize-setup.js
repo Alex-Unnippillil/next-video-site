@@ -6,8 +6,16 @@ import {
   CreateDatasetImportJobCommand,
   CreateSolutionCommand
 } from "@aws-sdk/client-personalize";
+import { loadAwsConfig } from "./env.js";
 
-const client = new PersonalizeClient({});
+const { accessKeyId, secretAccessKey, region } = loadAwsConfig();
+const client = new PersonalizeClient({
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey,
+  },
+});
 
 function parseArgs() {
   const args = {};

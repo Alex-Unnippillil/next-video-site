@@ -22,6 +22,7 @@ Utilities for working with Amazon Personalize live in `scripts/`:
 - `deploy-campaign.js` – deploys a recommendation campaign in Amazon Personalize.
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
 - `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
+- `upload-video.js` – uploads video files to Amazon S3 using multipart uploads with exponential backoff, logging the ETag and file size on success.
 
 ## Testing
 Execute tests (if any are defined):

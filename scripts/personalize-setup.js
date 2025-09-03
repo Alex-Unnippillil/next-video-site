@@ -7,6 +7,10 @@ import {
   CreateSolutionCommand
 } from "@aws-sdk/client-personalize";
 
+if (!process.env.TZ) {
+  process.env.TZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
 const client = new PersonalizeClient({});
 
 function parseArgs() {

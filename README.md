@@ -23,6 +23,17 @@ Utilities for working with Amazon Personalize live in `scripts/`:
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
 - `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
 
+## Using Cloudflare R2 via S3-Compatible API
+You can host video assets or datasets in [Cloudflare R2](https://developers.cloudflare.com/r2/), which exposes an S3-compatible API. Configure your tooling to point at the R2 endpoint and provide your R2 access keys.
+
+For example, the AWS CLI can target an R2 bucket by specifying the endpoint URL:
+
+```bash
+aws s3 ls --endpoint-url https://<accountid>.r2.cloudflarestorage.com
+```
+
+Replace `<accountid>` with your Cloudflare account ID. The command above lists buckets, and other `s3://` URLs work the same way when pointed at R2.
+
 ## Testing
 Execute tests (if any are defined):
 ```bash

@@ -23,6 +23,9 @@ Utilities for working with Amazon Personalize live in `scripts/`:
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
 - `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
 
+## AWS Permissions
+To upload interaction records to an S3 bucket, attach a policy that allows `s3:PutObject`, `s3:AbortMultipartUpload`, and `s3:ListBucketMultipartUploads` on the `events/*` prefix. An example policy is provided in [`scripts/events-bucket-policy.json`](scripts/events-bucket-policy.json).
+
 ## Testing
 Execute tests (if any are defined):
 ```bash

@@ -3,6 +3,10 @@
 ## Overview
 This repository contains a Next.js example app that serves video content and demonstrates how to integrate Amazon Personalize for tailored recommendations.
 
+## Features
+- Display recommended videos and view metadata for the selected clip.
+- Generate a server-signed share link for any video.
+
 ## Prerequisites
 - Node.js 18+
 - npm

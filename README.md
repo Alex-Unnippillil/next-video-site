@@ -3,6 +3,16 @@
 ## Overview
 This repository contains a Next.js example app that serves video content and demonstrates how to integrate Amazon Personalize for tailored recommendations.
 
+## Storage
+Video files and other assets are expected to live in an **Amazon S3** bucket.
+This is the primary storage backend for the application.
+
+For projects that need an alternative object store, you can point the app at
+any service that offers an S3‑compatible API. Cloudflare R2 is one such
+option: by configuring the SDK with R2's S3 endpoint and credentials, the app
+will interact with R2 just like it would with S3. This provides an escape
+hatch while keeping Amazon S3 as the default.
+
 ## Prerequisites
 - Node.js 18+
 - npm

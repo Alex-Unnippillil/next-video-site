@@ -23,6 +23,10 @@ Utilities for working with Amazon Personalize live in `scripts/`:
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
 - `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
 
+### Environment Variables
+
+- `RECORD_KEEP` – number of days to retain local dataset files after they have been uploaded. Files older than this threshold are removed after a successful upload.
+
 ## Testing
 Execute tests (if any are defined):
 ```bash

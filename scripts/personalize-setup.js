@@ -6,6 +6,8 @@ import {
   CreateDatasetImportJobCommand,
   CreateSolutionCommand
 } from "@aws-sdk/client-personalize";
+import { promises as fs } from "fs";
+import path from "path";
 
 const client = new PersonalizeClient({});
 
@@ -21,6 +23,24 @@ function parseArgs() {
     }
   }
   return args;
+}
+
+async function deleteOldFiles(dir, keepDays) {
+  const cutoff = Date.now() - keepDays * 24 * 60 * 60 * 1000;
+  const entries = await fs.readdir(dir);
+  await Promise.all(
+    entries.map(async (entry) => {
+      const filePath = path.join(dir, entry);
+      try {
+        const stats = await fs.stat(filePath);
+        if (stats.isFile() && stats.mtimeMs < cutoff) {
+          await fs.unlink(filePath);
+        }
+      } catch (err) {
+        // ignore errors for now
+      }
+    })
+  );
 }
 
 async function createSchema() {
@@ -74,6 +94,15 @@ async function createDataset(datasetGroupArn, schemaArn, datasetLocation) {
 
   const { datasetImportJobArn } = await client.send(importCommand);
   console.log(`Dataset import job ARN: ${datasetImportJobArn}`);
+
+  const keep = Number(process.env.RECORD_KEEP);
+  if (!Number.isNaN(keep) && keep > 0 && !datasetLocation.startsWith("s3://")) {
+    try {
+      await deleteOldFiles(path.dirname(datasetLocation), keep);
+    } catch (err) {
+      console.warn("Failed to delete old files", err);
+    }
+  }
 
   return datasetArn;
 }

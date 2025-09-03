@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import VideoPlayer from '../components/VideoPlayer';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
@@ -21,7 +22,7 @@ export default function Home() {
   return (
     <div className="container">
       <h1>Recommended Videos</h1>
-      <div className="video-player">Video player coming soon...</div>
+      <VideoPlayer src={videos[0]?.url} className="video-player" />
       <ul className="video-list">
         {Array.isArray(videos) && videos.map((video, idx) => (
           <li key={idx}>

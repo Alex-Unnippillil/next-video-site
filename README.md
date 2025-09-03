@@ -21,7 +21,7 @@ This repository contains a Next.js example app that serves video content and dem
 Utilities for working with Amazon Personalize live in `scripts/`:
 - `deploy-campaign.js` – deploys a recommendation campaign in Amazon Personalize.
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
-- `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
+- `send-event.js` – stores user interaction events in Amazon S3. It requires `S3_BUCKET` and `AWS_REGION` to be set and honors optional `S3_ENDPOINT`. Events are written under `WEB_READ_PREFIX` (default `events/`) and a signed read URL is returned using `SIGN_TTL_SECONDS` (default `1800`).
 
 ## Testing
 Execute tests (if any are defined):

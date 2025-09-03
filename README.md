@@ -22,6 +22,7 @@ Utilities for working with Amazon Personalize live in `scripts/`:
 - `deploy-campaign.js` – deploys a recommendation campaign in Amazon Personalize.
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
 - `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
+- `add-events-lifecycle.js` – configures an S3 bucket to expire `events/*` objects after 30 days.
 
 ## Testing
 Execute tests (if any are defined):

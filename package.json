@@ -2,7 +2,12 @@
   "name": "next-video-site",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
   "dependencies": {
-    "@aws-sdk/client-personalize": "^3.556.0"
+    "@aws-sdk/client-personalize": "^3.556.0",
+    "@aws-sdk/client-s3": "^3.879.0",
+    "@aws-sdk/s3-request-presigner": "^3.879.0"
   }
 }

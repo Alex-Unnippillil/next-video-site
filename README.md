@@ -23,6 +23,12 @@ Utilities for working with Amazon Personalize live in `scripts/`:
 - `personalize-setup.js` – initializes dataset groups, datasets, and solutions required by Personalize.
 - `send-event.js` – sends user interaction events to Personalize for model training and real-time recommendations.
 
+## Storage
+Cloudflare R2 is compatible with Amazon S3 and uses the same AWS Signature Version 4 signing process.
+Provide your R2 endpoint through the `S3_ENDPOINT` environment variable to reuse existing SDK code.
+The helper in `scripts/s3-client.js` builds an `S3Client` that respects this custom endpoint so the
+same code works with either service.
+
 ## Testing
 Execute tests (if any are defined):
 ```bash

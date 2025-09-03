@@ -1,58 +1,54 @@
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [videos, setVideos] = useState([]);
+  const [clips, setClips] = useState([]);
 
   useEffect(() => {
-    async function fetchVideos() {
+    async function fetchClips() {
       try {
-        const res = await fetch('/api/recommendations');
+        const res = await fetch('/api/clips', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
-          setVideos(data);
+          setClips(data);
         }
       } catch (err) {
         console.error(err);
       }
     }
-    fetchVideos();
+    fetchClips();
   }, []);
 
   return (
     <div className="container">
-      <h1>Recommended Videos</h1>
-      <div className="video-player">Video player coming soon...</div>
-      <ul className="video-list">
-        {Array.isArray(videos) && videos.map((video, idx) => (
-          <li key={idx}>
-            {typeof video === 'string' ? video : video.title}
-          </li>
-        ))}
-      </ul>
+      <h1>Clips</h1>
+      <div className="clip-grid">
+        {Array.isArray(clips) &&
+          clips.map((clip) => (
+            <div key={clip.id} className="clip-item">
+              <video
+                controls
+                poster={clip.poster}
+                src={clip.src}
+              />
+            </div>
+          ))}
+      </div>
       <style jsx>{`
         .container {
-          max-width: 800px;
+          max-width: 1200px;
           margin: 0 auto;
           padding: 2rem;
           font-family: sans-serif;
         }
-        .video-player {
+        .clip-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 1rem;
+        }
+        .clip-item video {
           width: 100%;
-          height: 360px;
-          background: #000;
-          color: #fff;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 1rem;
-        }
-        .video-list {
-          list-style: none;
-          padding: 0;
-        }
-        .video-list li {
-          padding: 0.5rem 0;
-          border-bottom: 1px solid #ddd;
+          height: auto;
+          display: block;
         }
       `}</style>
     </div>

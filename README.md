@@ -1,11 +1,20 @@
 # Next Video Site
 
-## Overview
-This repository contains a Next.js example app that serves video content and demonstrates how to integrate Amazon Personalize for tailored recommendations.
+## Goals
+- Demonstrate a minimal Next.js application that serves video content and integrates with **Amazon Personalize** to deliver tailored recommendations.
+- Provide example scripts for setting up datasets, sending user events, and deploying a recommendation campaign.
 
-## Prerequisites
-- Node.js 18+
-- npm
+## Constraints
+- Intended for educational use and not optimized for production environments.
+- Requires Node.js 18+ and npm.
+- Assumes AWS credentials with permissions to access Amazon Personalize.
+- Uses the legacy `pages` router with a single `index` page and a placeholder video player.
+- The recommendation API currently returns stubbed data until Personalize is configured.
+
+## High-Level Architecture
+- **Client**: `pages/index.js` renders the UI and fetches recommendations when the page loads.
+- **API**: `pages/api/recommendations.js` exposes an endpoint that can be wired to Amazon Personalize.
+- **Personalization Scripts**: utilities in `scripts/` prepare datasets, ingest events, and deploy a Personalize campaign.
 
 ## Setup
 1. Install dependencies:
